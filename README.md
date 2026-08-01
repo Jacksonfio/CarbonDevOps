@@ -64,79 +64,87 @@ The following interactive Mermaid diagram details the structural flow connecting
 ```mermaid
 %%{
   init: {
-    'theme': 'dark',
+    'theme': 'base',
     'themeVariables': {
+      'fontSize': '18px',
+      'fontFamily': 'Inter, system-ui, -apple-system, sans-serif',
       'primaryColor': '#0F172A',
       'primaryTextColor': '#F8FAFC',
       'primaryBorderColor': '#10B981',
       'lineColor': '#34D399',
       'secondaryColor': '#1E293B',
-      'tertiaryColor': '#0284C7'
+      'tertiaryColor': '#0284C7',
+      'labelBackground': '#1E293B',
+      'clusterBkg': '#0F172A',
+      'clusterBorder': '#334155',
+      'actorFontSize': '18px',
+      'messageFontSize': '16px',
+      'noteFontSize': '16px'
     }
   }
 }%%
 graph TD
-    classDef frontend fill:#0d1117,stroke:#10B981,stroke-width:2px,color:#34D399;
-    classDef backend fill:#161b22,stroke:#38BDF8,stroke-width:2px,color:#38BDF8;
-    classDef aws fill:#232f3e,stroke:#FF9900,stroke-width:2px,color:#FF9900;
-    classDef ext fill:#1f2937,stroke:#A855F7,stroke-width:2px,color:#C084FC;
-    classDef ai fill:#0f2027,stroke:#3B82F6,stroke-width:2px,color:#60A5FA;
-    classDef ledger fill:#1c1917,stroke:#F59E0B,stroke-width:2px,color:#FBBF24;
+    classDef frontend fill:#0F172A,stroke:#10B981,stroke-width:3px,color:#34D399,font-size:16px,font-weight:bold;
+    classDef backend fill:#1E293B,stroke:#38BDF8,stroke-width:3px,color:#38BDF8,font-size:16px,font-weight:bold;
+    classDef aws fill:#232F3E,stroke:#FF9900,stroke-width:3px,color:#FF9900,font-size:16px,font-weight:bold;
+    classDef ext fill:#1F2937,stroke:#A855F7,stroke-width:3px,color:#C084FC,font-size:16px,font-weight:bold;
+    classDef ai fill:#0F2027,stroke:#3B82F6,stroke-width:3px,color:#60A5FA,font-size:16px,font-weight:bold;
+    classDef ledger fill:#1C1917,stroke:#F59E0B,stroke-width:3px,color:#FBBF24,font-size:16px,font-weight:bold;
 
-    subgraph Client["🖥️ CarbonDevOps Control Plane (React 19 + Vite + Leaflet)"]
-        UI["Live Satellite Carbon Map (Esri HD)"]:::frontend
-        ParetoUI["Pareto Multi-Objective Optimizer"]:::frontend
-        SpecUI["Speculative Cache & Warm Artifacts"]:::frontend
-        QueueUI["Live SQS Queue & Dispatcher"]:::frontend
-        AuditUI["ESG / CSRD Compliance Dashboard"]:::frontend
+    subgraph Client["🖥️ CarbonDevOps Control Plane (React 19 + Vite)"]
+        UI["<b>Live Satellite Map</b><br/>(Esri HD & Leaflet)"]:::frontend
+        ParetoUI["<b>Pareto Optimizer UI</b><br/>(Cost vs Carbon vs Latency)"]:::frontend
+        SpecUI["<b>Speculative Cache</b><br/>(Warm Artifact Manager)"]:::frontend
+        QueueUI["<b>Live SQS Queue</b><br/>(Pipeline Dispatcher)"]:::frontend
+        AuditUI["<b>ESG / CSRD Portal</b><br/>(Audit Compliance)"]:::frontend
     end
 
-    subgraph Server["⚙️ Express Node.js Orchestrator & API Gateway"]
-        API["REST API Router (/api/*)"]:::backend
-        Interceptor["Deployment Interceptor & Circuit Breaker"]:::backend
-        ResilientClient["Resilient API Client (Rate Limit Handler)"]:::backend
-        ParetoEngine["Pareto Math Optimization Engine"]:::backend
+    subgraph Server["⚙️ Express Orchestrator & API Router"]
+        API["<b>REST API Gateway</b><br/>(/api/* Router)"]:::backend
+        Interceptor["<b>Deployment Interceptor</b><br/>(Circuit Breaker Engine)"]:::backend
+        ResilientClient["<b>Resilient API Client</b><br/>(Grid Rate Limiter)"]:::backend
+        ParetoEngine["<b>Pareto Optimizer</b><br/>(Mathematical Solver)"]:::backend
     end
 
     subgraph AI["🤖 AI Intelligence Layer"]
-        Gemini["Google Gemini 2.5 / 3.0 AI Model"]:::ai
+        Gemini["<b>Google Gemini 2.5 / 3.0</b><br/>(AI Optimization Engine)"]:::ai
     end
 
-    subgraph External["📡 Telemetry & Mapping Services"]
-        EM["Electricity Maps API v3 (Live Grid Data)"]:::ext
-        Esri["Esri World Imagery (Satellite Tiles)"]:::ext
+    subgraph External["📡 Telemetry & Mapping Data"]
+        EM["<b>Electricity Maps API v3</b><br/>(Live Grid Telemetry)"]:::ext
+        Esri["<b>Esri World Imagery</b><br/>(Satellite Tile Server)"]:::ext
     end
 
-    subgraph AWS["☁️ AWS Cloud Compute Layer"]
-        SQS["AWS SQS Carbon-Aware Queue"]:::aws
-        Lambda["AWS Lambda Serverless Executor"]:::aws
-        CloudWatch["AWS CloudWatch Metrics & Logs"]:::aws
-        S3["AWS S3 Audit Log Repository"]:::aws
+    subgraph AWS["☁️ AWS Cloud Infrastructure"]
+        SQS["<b>AWS SQS Queue</b><br/>(Carbon-Aware Hold Queue)"]:::aws
+        Lambda["<b>AWS Lambda</b><br/>(Serverless Workload Executor)"]:::aws
+        CloudWatch["<b>AWS CloudWatch</b><br/>(Metrics & Telemetry Logs)"]:::aws
+        S3["<b>AWS S3 Storage</b><br/>(Audit Log Archives)"]:::aws
     end
 
     subgraph Security["🔐 Audit & Compliance Engine"]
-        Ledger["Tamper-Evident Cryptographic Ledger"]:::ledger
+        Ledger["<b>Tamper-Evident Ledger</b><br/>(SHA-256 Block Chain)"]:::ledger
     end
 
-    UI -->|Query Grid Intensity| API
-    QueueUI -->|Enqueue / Manual Override| API
-    ParetoUI -->|Compute Trade-Off Curve| ParetoEngine
-    AuditUI -->|Fetch Scope 3 Audit Logs| API
+    UI -->|Query Grid| API
+    QueueUI -->|Dispatch Request| API
+    ParetoUI -->|Compute Frontier| ParetoEngine
+    AuditUI -->|Fetch Audit Logs| API
 
-    API -->|Real-time Grid Query| ResilientClient
-    ResilientClient -->|HTTP GET /v3/carbon-intensity| EM
-    UI -->|Render HD Earth Overlay| Esri
+    API -->|Fetch Real-time Grid| ResilientClient
+    ResilientClient -->|HTTP GET /v3| EM
+    UI -->|Render Earth Tiles| Esri
 
-    API -->|Context & Workflow Meta| Gemini
-    Gemini -->|Optimization Strategy & Forecast| API
+    API -->|Prompt & Queue Context| Gemini
+    Gemini -->|AI Advisory Strategy| API
 
-    API -->|Intercept & Evaluate Threshold| Interceptor
-    Interceptor -->|Dispatch Low-Carbon Build| SQS
-    SQS -->|Trigger Region Build| Lambda
-    Lambda -->|Telemetry & Logs| CloudWatch
+    API -->|Evaluate Carbon Threshold| Interceptor
+    Interceptor -->|Enforce Low-Carbon Build| SQS
+    SQS -->|Trigger Green Build| Lambda
+    Lambda -->|Telemetry Logs| CloudWatch
     CloudWatch -->|Sync Metrics| API
 
-    Interceptor -->|Record Executed Block| Ledger
+    Interceptor -->|Record Signed Block| Ledger
     Ledger -->|Store Immutable JSON| S3
 ```
 
@@ -145,33 +153,58 @@ graph TD
 ### Webhook Execution Sequence
 
 ```mermaid
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'fontSize': '18px',
+      'fontFamily': 'Inter, system-ui, -apple-system, sans-serif',
+      'actorFontSize': '18px',
+      'messageFontSize': '16px',
+      'noteFontSize': '16px',
+      'actorBkg': '#0F172A',
+      'actorBorder': '#10B981',
+      'actorTextColor': '#34D399',
+      'actorLineColor': '#34D399',
+      'signalColor': '#38BDF8',
+      'signalTextColor': '#F8FAFC',
+      'labelBoxBkgColor': '#1E293B',
+      'labelBoxBorderColor': '#38BDF8',
+      'labelTextColor': '#38BDF8',
+      'loopTextColor': '#F59E0B',
+      'noteBkgColor': '#1E293B',
+      'noteBorderColor': '#A855F7',
+      'noteTextColor': '#C084FC'
+    }
+  }
+}%%
 sequenceDiagram
     autonumber
-    participant Git as 🐙 GitHub Webhook
-    participant Interceptor as 🛡️ Carbon Interceptor
-    participant Grid as ⚡ Electricity Maps API
-    participant Speculative as ⚡ Speculative Cache
-    participant SQS as ☁️ AWS SQS Queue
-    participant Lambda as 🚀 AWS Lambda
-    participant Ledger as ⛓️ ESG Audit Ledger
+    actor Git as 🐙 GitHub Webhook
+    actor Interceptor as 🛡️ Carbon Interceptor
+    actor Grid as ⚡ Electricity Maps
+    actor Speculative as ⚡ Speculative Cache
+    actor SQS as ☁️ AWS SQS Queue
+    actor Lambda as 🚀 AWS Lambda
+    actor Ledger as ⛓️ ESG Audit Ledger
 
-    Git->>Interceptor: POST /api/queue/enqueue (Commit Payload)
-    Interceptor->>Grid: Query Live Carbon Intensity (gCO2eq/kWh)
-    Grid-->>Interceptor: Intensity: 182 gCO2eq/kWh (Threshold: 250)
-    
-    alt Carbon Intensity <= Threshold
-        Interceptor->>Speculative: Check for Warm Artifact Match
-        alt Cache Hit
-            Speculative-->>Interceptor: Warm Image SHA-256 Digest Ready
-            Interceptor->>Lambda: Instant Dispatch (0.2s Execution)
+    Git->>Interceptor: 1. POST /api/queue/enqueue (Commit Payload)
+    Interceptor->>Grid: 2. Query Live Grid Intensity (gCO2eq/kWh)
+    Grid-->>Interceptor: 3. Grid Metrics (e.g. 182 gCO2eq/kWh, Threshold: 250)
+
+    alt Low Carbon Window (Grid Intensity <= Threshold)
+        Interceptor->>Speculative: 4. Check Warm Pre-built Artifact
+        alt Speculative Cache Hit
+            Speculative-->>Interceptor: 5. Pre-built Digest Ready (sha256:...)
+            Interceptor->>Lambda: 6. Instant Dispatch (< 0.5s Execution)
         else Cache Miss
-            Interceptor->>Lambda: Trigger Standard Build in Green Region
+            Interceptor->>Lambda: 6. Dispatch Standard Build to Green Region
         end
-        Lambda-->>Ledger: Write Cryptographic Block (Previous Hash + Signature)
-        Interceptor-->>Git: Status 200 OK (Deployed - Saved 4.2kg CO2)
-    else Carbon Intensity > Threshold (High Emissions)
-        Interceptor->>SQS: Hold Workload in SQS Queue (Status: HELD)
-        Interceptor-->>Git: Status 202 Accepted (Pipeline Queued for Clean Window)
+        Lambda-->>Ledger: 7. Write Signed Block (Previous Hash + Signature)
+        Interceptor-->>Git: 8. HTTP 200 OK (Deployed - Saved Carbon)
+    else High Carbon Peak (Grid Intensity > Threshold)
+        Interceptor->>SQS: 4. Hold Workload in SQS Queue (Status: HELD)
+        Interceptor-->>Git: 5. HTTP 202 Accepted (Queued for Clean Energy Window)
     end
 ```
 
