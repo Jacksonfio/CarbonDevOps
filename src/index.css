@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --primary: #00FF41;
+    --on-primary: #000000;
+    --primary-container: #003B0F;
+    --on-primary-container: #00FF41;
+    --secondary: #3B82F6;
+    --secondary-container: #1E3A8A;
+    --on-secondary-container: #93C5FD;
+    --tertiary: #F59E0B;
+    --tertiary-container: #78350F;
+    --background: #0A0A0A;
+    --surface: #0D0D0D;
+    --surface-container-low: #111111;
+    --surface-container: #141414;
+    --surface-container-high: #1A1A1A;
+    --surface-container-lowest: #050505;
+    --on-surface: #E0E0E0;
+    --on-surface-variant: #A1A1AA;
+    --outline: #2A2A2A;
+    --outline-variant: #1A1A1A;
+    --error: #EF4444;
+  }
+}
+
+body {
+  background-color: #0A0A0A;
+  color: #E0E0E0;
+  font-family: 'Inter', sans-serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+.material-symbols-filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  line-height: 1;
+}
+
+.font-headline {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+}
+
+.font-code {
+  font-family: 'Geist', monospace;
+}
+
+/* Custom Dark Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb {
+  background: #2A2A2A;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3F3F46;
+}
+
+/* Dark Glassmorphism */
+.glass-card {
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid #2A2A2A;
+}
+
+/* Map Radar & Animation Keyframes */
+@keyframes radarPing {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes dashFlow {
+  from {
+    stroke-dashoffset: 40;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.8), 0 0 20px rgba(0, 255, 65, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(0, 255, 65, 1), 0 0 45px rgba(0, 255, 65, 0.8);
+    transform: scale(1.1);
+  }
+}
+
+.radar-ring-green {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #00FF41;
+  background: rgba(0, 255, 65, 0.25);
+  animation: radarPing 2s infinite cubic-bezier(0, 0.2, 0.8, 1);
+  pointer-events: none;
+}
+
+.radar-ring-yellow {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #F59E0B;
+  background: rgba(245, 158, 11, 0.2);
+  animation: radarPing 2.5s infinite cubic-bezier(0, 0.2, 0.8, 1);
+  pointer-events: none;
+}
+
+.cleanest-pulse-glow {
+  animation: pulseGlow 1.8s infinite ease-in-out;
+}
+
+.animated-flow-line {
+  stroke-dasharray: 8, 8;
+  animation: dashFlow 1s linear infinite;
+}
+
+.dark-leaflet-popup .leaflet-popup-content-wrapper {
+  background: #141414 !important;
+  color: #E0E0E0 !important;
+  border: 1px solid #2A2A2A !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8) !important;
+  padding: 0 !important;
+}
+
+.dark-leaflet-popup .leaflet-popup-tip {
+  background: #141414 !important;
+  border: 1px solid #2A2A2A !important;
+}
+
+
+
